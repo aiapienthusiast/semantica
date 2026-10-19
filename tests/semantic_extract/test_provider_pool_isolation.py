@@ -477,7 +477,7 @@ class TestProviderPoolInternals(unittest.TestCase):
 
     def test_all_api_key_providers_covered(self):
         """All built-in API-key-using providers must be listed in _API_KEY_PROVIDERS."""
-        expected = {"openai", "gemini", "groq", "anthropic", "deepseek", "novita"}
+        expected = {"openai", "gemini", "groq", "anthropic", "deepseek", "novita", "cheaperinference"}
         self.assertEqual(ProviderPool._API_KEY_PROVIDERS, expected)
 
 

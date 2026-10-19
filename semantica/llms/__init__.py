@@ -26,6 +26,7 @@ Supported Providers:
     - Ollama: Local models served through Ollama
     - DeepSeek: DeepSeek's OpenAI-compatible API
     - Novita: Novita AI's OpenAI-compatible API
+    - CheaperInference: Cheaper Inference's OpenAI-compatible API
     - Jev: TypeSafe System One typed decisions (Choice, Noul, and Score)
 
 Example Usage:
@@ -70,6 +71,10 @@ Example Usage:
     >>> novita = Novita(model="deepseek/deepseek-v3.2", api_key="your-key")
     >>> response = novita.generate("Hello, world!")
     >>>
+    >>> # Cheaper Inference provider
+    >>> ci = CheaperInference(model="gpt-5.4-mini", api_key="your-key")
+    >>> response = ci.generate("Hello, world!")
+    >>>
     >>> # TypeSafe Jev (decision-only; no text generation methods)
     >>> jev = Jev(api_key="your-key")
     >>> decision = jev.decide(
@@ -90,6 +95,7 @@ from .groq import Groq
 from .huggingface import HuggingFaceLLM
 from .litellm import LiteLLM
 from .novita import Novita
+from .cheaperinference import CheaperInference
 from .ollama import Ollama
 from .openai import OpenAI
 from .typesafe import AsyncJev, Jev, JevDecisionResult
@@ -104,6 +110,7 @@ __all__ = [
     "Ollama",
     "DeepSeek",
     "Novita",
+    "CheaperInference",
     "Jev",
     "AsyncJev",
     "JevDecisionResult",

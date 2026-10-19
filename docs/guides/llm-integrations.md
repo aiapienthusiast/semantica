@@ -569,6 +569,41 @@ for e in entities:
     print("{} ({}) conf={:.2f}".format(e.text, e.label, e.confidence))
 ```
 
+## Cheaper Inference — One Key for Several Model Families
+
+**Cheaper Inference** is an OpenAI-compatible LLM gateway. One API key gives access to models from several labs, so you can compare model families without a new client for each one.
+
+Install with `pip install "semantica[llm-cheaperinference]"` (or `pip install openai`, since Cheaper Inference is accessed through the OpenAI client pointed at a different base URL).
+
+```python
+from semantica.llms import CheaperInference
+
+llm = CheaperInference(model="gpt-5.4-mini", api_key="YOUR_CHEAPERINFERENCE_KEY")
+# api_key falls back to the CHEAPERINFERENCE_API_KEY environment variable
+
+if not llm.is_available():
+    raise RuntimeError("Cheaper Inference provider not configured - set CHEAPERINFERENCE_API_KEY")
+
+response = llm.generate("Summarize the Basel III leverage ratio requirement.")
+
+data = llm.generate_structured(
+    "Extract drug names and dosages from: "
+    "Patient received warfarin 5mg daily, aspirin 75mg daily, metformin 500mg twice daily."
+)
+```
+
+Cheaper Inference is also reachable as a provider name string for the NER interface:
+
+```python
+from semantica.semantic_extract import NamedEntityRecognizer
+
+ner = NamedEntityRecognizer(
+    methods=["llm"],
+    provider="cheaperinference",
+    llm_model="gpt-5.4-mini",
+)
+```
+
 ## Domain Examples
 
 <Tabs>
